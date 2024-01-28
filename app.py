@@ -32,7 +32,7 @@ def main():
         chunks = text_splitter.split_text(text)
 
         # Create embedding
-        embeddings = HuggingFaceEmbeddings()
+        embeddings = HuggingFaceEmbeddings(model_name ="sentence-transformers/all-MiniLM-L6-v2")
         knowledge_base = FAISS.from_texts(chunks, embeddings)
 
         # User input
@@ -40,7 +40,7 @@ def main():
 
         if user_question:
             docs = knowledge_base.similarity_search(user_question)
-            llm = HuggingFaceHub(repo_id="google/flan-t5-large", model_kwargs={"temperature": 5, "max_length": 64})
+            llm = HuggingFaceHub(repo_id="baffo32/decapoda-research-llama-7B-hf", model_kwargs={"temperature":0.5})
             chain = load_qa_chain(llm, chain_type="stuff")
             response = chain.run(input_documents=docs, question=user_question)
 
