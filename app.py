@@ -9,7 +9,8 @@ from langchain.chains.question_answering import load_qa_chain
 from langchain import HuggingFaceHub
 
 def main():
-    load_dotenv()
+    #load_dotenv()
+    os.environ["HUGGINGFACEHUB_API_TOKEN"]
     st.set_page_config(page_title="Ask your PDF")
     st.header("Ask Your PDF")
 
