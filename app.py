@@ -44,7 +44,7 @@ def main():
         if user_question:
             docs = knowledge_base.similarity_search(user_question, top_k=3)
             st.write("docs end")
-            llm = HuggingFaceHub(repo_id="openai-community/gpt2-medium", model_kwargs={"temperature":3, "max_length":2000})
+            llm = HuggingFaceHub(repo_id="deepset/roberta-base-squad2", model_kwargs={"temperature":3, "max_length":2000})
             st.write("llm end")
             chain = load_qa_chain(llm, chain_type="stuff")
             st.write("chain loaded")
