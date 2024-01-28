@@ -44,7 +44,7 @@ def main():
         if user_question:
             docs = knowledge_base.similarity_search(user_question)
             st.write("docs end")
-            llm = HuggingFaceHub(repo_id="meta-llama/Llama-2-70b-chat-hf", model_kwargs={"temperature":5, "max_length":2000})
+            llm = HuggingFaceHub(repo_id="mistralai/Mixtral-8x7B-Instruct-v0.1", model_kwargs={"temperature":5, "max_length":2000})
             st.write("llm end")
             chain = load_qa_chain(llm, chain_type="stuff")
             st.write("chain loaded")
