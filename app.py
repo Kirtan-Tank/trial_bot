@@ -32,18 +32,24 @@ def main():
         chunks = text_splitter.split_text(text)
 
         # Create embedding
+        st.write("Embeddings start")
         embeddings = HuggingFaceEmbeddings(model_name ="sentence-transformers/all-MiniLM-L6-v2")
+        st.write("Embeddings end")
+        st.write("FAISS start")
         knowledge_base = FAISS.from_texts(chunks, embeddings)
-
+        st.write("FAISS end")    
         # User input
         user_question = st.text_input("Ask Question about your PDF:")
 
         if user_question:
             docs = knowledge_base.similarity_search(user_question)
+            st.write("docs end")
             llm = HuggingFaceHub(repo_id="meta-llama/Llama-2-7b", model_kwargs={"temperature":0.5})
+            st.write("llm end")
             chain = load_qa_chain(llm, chain_type="stuff")
+            st.write("chain loaded")
             response = chain.run(input_documents=docs, question=user_question)
-
+            st.write("response ready")
             st.write(response)
 
 if __name__ == '__main__':
