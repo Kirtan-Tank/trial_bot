@@ -42,9 +42,9 @@ def main():
         user_question = st.text_input("Ask Question about your PDF:")
 
         if user_question:
-            docs = knowledge_base.similarity_search(user_question)
+            docs = knowledge_base.similarity_search(user_question, top_k=3)
             st.write("docs end")
-            llm = HuggingFaceHub(repo_id="google/flan-t5-xxl", model_kwargs={"temperature":5, "max_length":500})
+            llm = HuggingFaceHub(repo_id="google/flan-t5-xxl", model_kwargs={"temperature":3, "max_length":800})
             st.write("llm end")
             chain = load_qa_chain(llm, chain_type="stuff")
             st.write("chain loaded")
