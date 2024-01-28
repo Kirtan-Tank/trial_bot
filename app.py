@@ -42,7 +42,7 @@ def main():
         user_question = st.text_input("Ask Question about your PDF:")
 
         if user_question:
-            docs = knowledge_base.similarity_search(user_question, top_k=3)
+            docs = knowledge_base.similarity_search(user_question, top_k=2)
             st.write("docs end")
             llm = HuggingFaceHub(repo_id="Qiliang/bart-large-cnn-samsum-ChatGPT_v3", model_kwargs={"temperature":0.3, "max_length":5000})
             st.write("llm end")
