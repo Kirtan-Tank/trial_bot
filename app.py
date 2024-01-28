@@ -44,7 +44,8 @@ def main():
         if user_question:
             docs = knowledge_base.similarity_search(user_question, top_k=5)
             st.write("docs end")
-            llm = HuggingFaceHub(repo_id="Qiliang/bart-large-cnn-samsum-ChatGPT_v3", model_kwargs={"temperature":0.5, "max_length":5000})
+            #"Qiliang/bart-large-cnn-samsum-ChatGPT_v3"
+            llm = HuggingFaceHub(repo_id="lmqg/t5-large-squad-qg", model_kwargs={"temperature":0.5, "max_length":5000})
             st.write("llm end")
             chain = load_qa_chain(llm, chain_type="stuff")
             st.write("chain loaded")
