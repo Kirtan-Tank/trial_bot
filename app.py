@@ -1,5 +1,6 @@
 from dotenv import load_dotenv
 import os
+import toml
 import streamlit as st
 from PyPDF2 import PdfReader
 from langchain.text_splitter import CharacterTextSplitter
