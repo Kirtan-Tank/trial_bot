@@ -26,8 +26,8 @@ def create_embeddings():
 
 # Caching the knowledge base creation using st.cache_resource
 @st.cache_resource
-def create_knowledge_base(chunks, embeddings):
-    knowledge_base = FAISS.from_texts(chunks, embeddings)
+def create_knowledge_base(_embeddings, chunks):
+    knowledge_base = FAISS.from_texts(chunks, _embeddings)
     return knowledge_base
 
 # Caching the question answering chain loading using st.cache_resource
@@ -67,7 +67,7 @@ def main():
         st.write("Embeddings end")
 
         st.write("FAISS start")
-        knowledge_base = create_knowledge_base(chunks, embeddings)
+        knowledge_base = create_knowledge_base(embeddings, chunks)
         st.write("FAISS end")
 
         # User input
