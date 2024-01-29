@@ -42,7 +42,7 @@ def main():
         user_question = st.text_input("Ask Question about your PDF:")
 
         if user_question:
-            docs = knowledge_base.similarity_search(user_question, top_k=3)
+            docs = knowledge_base.similarity_search(user_question, top_k=1)
             st.write("docs end")
             #"Qiliang/bart-large-cnn-samsum-ChatGPT_v3"
             #"google/flan-t5-xxl"
