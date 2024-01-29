@@ -42,11 +42,11 @@ def main():
         user_question = st.text_input("Ask Question about your PDF:")
 
         if user_question:
-            docs = knowledge_base.similarity_search(user_question, top_k=5)
+            docs = knowledge_base.similarity_search(user_question, top_k=3)
             st.write("docs end")
             #"Qiliang/bart-large-cnn-samsum-ChatGPT_v3"
             #"google/flan-t5-xxl"
-            llm = HuggingFaceHub(repo_id="Qiliang/bart-large-cnn-samsum-ChatGPT_v3", model_kwargs={"temperature":15, "max_length":5000, 'max_tokens':1000})
+            llm = HuggingFaceHub(repo_id="Qiliang/bart-large-cnn-samsum-ChatGPT_v3", model_kwargs={"temperature":8, "max_length":5000, 'max_tokens':1000})
             st.write("llm end")
             chain = load_qa_chain(llm, chain_type="stuff")
             st.write("chain loaded")
