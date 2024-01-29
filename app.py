@@ -9,8 +9,8 @@ from langchain.vectorstores import FAISS
 from langchain.chains.question_answering import load_qa_chain
 from langchain import HuggingFaceHub
 
-# Caching the PDF extraction
-@st.cache
+# Caching the PDF extraction using st.cache_data
+@st.cache_data
 def extract_text_from_pdf(pdf):
     text = ""
     pdf_reader = PdfReader(pdf)
@@ -18,20 +18,20 @@ def extract_text_from_pdf(pdf):
         text += page.extract_text()
     return text
 
-# Caching the embeddings creation
-@st.cache
-def create_embeddings(text):
+# Caching the embeddings creation using st.cache_resource
+@st.cache_resource
+def create_embeddings():
     embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
     return embeddings
 
-# Caching the knowledge base creation
-@st.cache
+# Caching the knowledge base creation using st.cache_resource
+@st.cache_resource
 def create_knowledge_base(chunks, embeddings):
     knowledge_base = FAISS.from_texts(chunks, embeddings)
     return knowledge_base
 
-# Caching the question answering chain loading
-@st.cache
+# Caching the question answering chain loading using st.cache_resource
+@st.cache_resource
 def load_question_answering_chain():
     llm = HuggingFaceHub(repo_id="Qiliang/bart-large-cnn-samsum-ChatGPT_v3", model_kwargs={"temperature": 8, "max_length": 5000, 'max_tokens': 1000})
     chain = load_qa_chain(llm, chain_type="stuff")
@@ -63,7 +63,7 @@ def main():
 
         # Create embedding
         st.write("Embeddings start")
-        embeddings = create_embeddings(text)
+        embeddings = create_embeddings()
         st.write("Embeddings end")
 
         st.write("FAISS start")
