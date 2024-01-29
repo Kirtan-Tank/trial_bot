@@ -82,6 +82,7 @@ def main():
             st.write("chain loaded")
 
             response = chain.run(input_documents=docs, question=user_question)
+            st.write("Generating response...Kindly wait")
             st.write("response ready")
             st.write(response)
 
