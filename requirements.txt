@@ -7,3 +7,4 @@ faiss-cpu==1.7.4
 sentence-transformers==2.2.2
 langchain-community==0.0.16
 inotify==0.2.10
+toml==0.10.2
