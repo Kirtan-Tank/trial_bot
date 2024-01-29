@@ -80,9 +80,9 @@ def main():
             st.write("llm end")
             chain = load_question_answering_chain()
             st.write("chain loaded")
-
-            response = chain.run(input_documents=docs, question=user_question)
             st.write("Generating response...Kindly wait")
+            response = chain.run(input_documents=docs, question=user_question)
+            
             st.write("response ready")
             st.write(response)
 
