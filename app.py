@@ -22,7 +22,7 @@ def extract_text_from_pdf(pdf):
 # Caching the embeddings creation using st.cache_resource
 @st.cache_resource
 def create_embeddings():
-    embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
+    embeddings = HuggingFaceEmbeddings(model_name="BAAI/bge-large-en-v1.5")
     return embeddings
 
 # Caching the knowledge base creation using st.cache_resource
@@ -34,7 +34,8 @@ def create_knowledge_base(_embeddings, chunks):
 # Caching the question answering chain loading using st.cache_resource
 @st.cache_resource
 def load_question_answering_chain():
-    llm = HuggingFaceHub(repo_id="Qiliang/bart-large-cnn-samsum-ChatGPT_v3", model_kwargs={"temperature": 8, "max_length": 5000, 'max_tokens': 1000})
+    # llm = HuggingFaceHub(repo_id="Qiliang/bart-large-cnn-samsum-ChatGPT_v3", model_kwargs={"temperature": 8, "max_length": 5000, 'max_tokens': 1000})
+    llm = HuggingFaceHub(repo_id="facebook/bart-large-cnn", model_kwargs={"temperature": 8, "max_length": 5000, 'max_tokens': 1000})
     # chain = load_qa_with_sources_chain(llm, chain_type="map_reduce")
     chain = load_qa_chain(llm, chain_type="stuff")
     return chain
