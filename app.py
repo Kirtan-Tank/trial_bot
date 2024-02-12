@@ -7,6 +7,7 @@ from langchain.text_splitter import CharacterTextSplitter
 from langchain.embeddings.huggingface import HuggingFaceEmbeddings
 from langchain.vectorstores import FAISS
 from langchain.chains.question_answering import load_qa_chain
+from langchain.chains.qa_with_sources import load_qa_with_sources_chain
 from langchain import HuggingFaceHub
 
 # Caching the PDF extraction using st.cache_data
@@ -34,7 +35,8 @@ def create_knowledge_base(_embeddings, chunks):
 @st.cache_resource
 def load_question_answering_chain():
     llm = HuggingFaceHub(repo_id="Qiliang/bart-large-cnn-samsum-ChatGPT_v3", model_kwargs={"temperature": 8, "max_length": 5000, 'max_tokens': 1000})
-    chain = load_qa_chain(llm, chain_type="stuff")
+    chain = load_qa_with_sources_chain(llm, chain_type="map_reduce")
+    # chain = load_qa_chain(llm, chain_type="stuff")
     return chain
 
 def main():
