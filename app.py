@@ -22,7 +22,7 @@ def extract_text_from_pdf(pdf):
 # Caching the embeddings creation using st.cache_resource
 @st.cache_resource
 def create_embeddings():
-    embeddings = HuggingFaceEmbeddings(model_name="Salesforce/SFR-Embedding-Mistral")
+    embeddings = HuggingFaceEmbeddings(model_name="fabiochiu/t5-base-tag-generation")
     return embeddings
 
 # Caching the knowledge base creation using st.cache_resource
