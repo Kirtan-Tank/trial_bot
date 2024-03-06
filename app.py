@@ -38,7 +38,7 @@ def create_knowledge_base(_embeddings, chunks):
 @st.cache_resource
 def load_question_answering_chain():
     # llm = HuggingFaceHub(repo_id="Qiliang/bart-large-cnn-samsum-ChatGPT_v3", model_kwargs={"temperature": 8, "max_length": 5000, 'max_tokens': 1000})
-    llm = HuggingFaceHub(repo_id="HuggingFaceH4/mistral-7b-sft-beta", model_kwargs={"temperature": 3, 'max_new_tokens': 1000})
+    llm = HuggingFaceHub(repo_id="meta-llama/Llama-2-7b-chat-hf", model_kwargs={"temperature": 3, 'max_new_tokens': 1000})
     # chain = load_qa_with_sources_chain(llm, chain_type="map_reduce")
     
 
