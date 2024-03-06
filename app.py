@@ -5,10 +5,11 @@ import streamlit as st
 from PyPDF2 import PdfReader
 from langchain.text_splitter import CharacterTextSplitter
 from langchain.embeddings.huggingface import HuggingFaceEmbeddings
-from langchain.vectorstores import FAISS
+# from langchain.vectorstores import FAISS
 from langchain.chains.question_answering import load_qa_chain
 from langchain.chains.qa_with_sources import load_qa_with_sources_chain
 from langchain import HuggingFaceHub
+from langchain_community.vectorstores import FAISS
 
 # Caching the PDF extraction using st.cache_data
 @st.cache_data
