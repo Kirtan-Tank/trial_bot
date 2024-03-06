@@ -34,8 +34,8 @@ def create_knowledge_base(_embeddings, chunks):
 # Caching the question answering chain loading using st.cache_resource
 @st.cache_resource
 def load_question_answering_chain():
-    llm = HuggingFaceHub(repo_id="Qiliang/bart-large-cnn-samsum-ChatGPT_v3", model_kwargs={"temperature": 8, "max_length": 5000, 'max_tokens': 1000})
-    # llm = HuggingFaceHub(repo_id="fabiochiu/t5-base-tag-generation", model_kwargs={"temperature": 8, "max_length": 5000, 'max_tokens': 1000})
+    # llm = HuggingFaceHub(repo_id="Qiliang/bart-large-cnn-samsum-ChatGPT_v3", model_kwargs={"temperature": 8, "max_length": 5000, 'max_tokens': 1000})
+    llm = HuggingFaceHub(repo_id="distilbert/distilgpt2", model_kwargs={"temperature": 3, "max_length": 5000, 'max_tokens': 1000})
     # chain = load_qa_with_sources_chain(llm, chain_type="map_reduce")
     chain = load_qa_chain(llm, chain_type="stuff")
     return chain
