@@ -22,7 +22,7 @@ def extract_text_from_pdf(pdf):
 # Caching the embeddings creation using st.cache_resource
 @st.cache_resource
 def create_embeddings():
-    embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
+    embeddings = HuggingFaceEmbeddings(model_name="BAAI/bge-small-en-v1.5")  #sentence-transformers/all-MiniLM-L6-v2
     return embeddings
 
 # Caching the knowledge base creation using st.cache_resource
