@@ -1,4 +1,4 @@
-# Ask Your PDF: Customizable Hugging Face Model Testing
+# HF Model Playground: Customizable Hugging Face Model Testing
 
 This project is a **Streamlit application** designed to enable users to test Hugging Face large language models (LLMs) with customizable parameters, such as embedding models and LLM configurations. Users can upload PDF documents, ask questions about their content, and experiment with different Hugging Face models and settings.
 
