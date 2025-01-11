@@ -24,8 +24,8 @@ def extract_text_from_pdf(pdf):
 
 # Caching the embeddings creation using st.cache_resource
 @st.cache_resource
-def create_embeddings():
-    embeddings = HuggingFaceEmbeddings(model_name="BAAI/bge-small-en-v1.5")  #sentence-transformers/all-MiniLM-L6-v2
+def create_embeddings(hf_embedding_model="BAAI/bge-small-en-v1.5"):
+    embeddings = HuggingFaceEmbeddings(model_name=hf_embedding_model)  #sentence-transformers/all-MiniLM-L6-v2
     return embeddings
 
 # Caching the knowledge base creation using st.cache_resource
@@ -36,9 +36,9 @@ def create_knowledge_base(_embeddings, chunks):
 
 # Caching the question answering chain loading using st.cache_resource
 @st.cache_resource
-def load_question_answering_chain():
+def load_question_answering_chain(hf_llm="Qiliang/bart-large-cnn-samsum-ChatGPT_v3", temperature= 3, max_new_tokens=1000):
     # llm = HuggingFaceHub(repo_id="Qiliang/bart-large-cnn-samsum-ChatGPT_v3", model_kwargs={"temperature": 8, "max_length": 5000, 'max_tokens': 1000})
-    llm = HuggingFaceHub(repo_id="bigscience/bloom-560m", model_kwargs={"temperature": 3, 'max_new_tokens': 1000})
+    llm = HuggingFaceHub(repo_id=hf_llm, model_kwargs={"temperature": temperature, 'max_new_tokens': max_new_tokens})
     # chain = load_qa_with_sources_chain(llm, chain_type="map_reduce")
     
 
@@ -57,6 +57,9 @@ def main():
 
     pdf = st.file_uploader("Upload your pdf", type="pdf")
 
+    hf_llm = st.text_input("Enter the HuggingFace LLM repo id:")
+    hf_embedding_model = st.text_input("Enter the HuggingFace Embedding model repo id:")
+    
     if pdf is not None:
         text = extract_text_from_pdf(pdf)
 
@@ -71,7 +74,7 @@ def main():
 
         # Create embedding
         st.write("Embeddings start")
-        embeddings = create_embeddings()
+        embeddings = create_embeddings(hf_embedding_model)
         st.write("Embeddings end")
 
         st.write("FAISS start")
@@ -86,7 +89,7 @@ def main():
             st.write("docs end")
 
             st.write("llm end")
-            chain = load_question_answering_chain()
+            chain = load_question_answering_chain(hf_llm, temperature= 3, max_new_tokens=1000)
             st.write("chain loaded")
             st.write("Generating response...Kindly wait")
             response = chain.run(input_documents=docs, question=user_question)
