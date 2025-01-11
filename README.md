@@ -140,7 +140,7 @@ If you'd like to contribute, feel free to fork the repository and submit a pull 
 
 ## License
 
-This project is licensed under the MIT License. See the `LICENSE` file for details.
+See the `LICENSE` file for details.
 
 ---
 
